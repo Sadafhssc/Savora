@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const CartTable = () => {
   const { cartItems, deleteFromCart } = useContext(AppContext);
+
+  const navigate = useNavigate();
 
   const [subtotal, setSubtotal] = useState(0);
 
@@ -26,6 +29,7 @@ const CartTable = () => {
         <div className="container my-5">
 
           {/* ================= Cart Table ================= */}
+
           <table className="table align-middle">
             <thead className="text-secondary">
               <tr>
@@ -76,7 +80,8 @@ const CartTable = () => {
 
           <div className="row mt-5">
 
-            {/* Left Side */}
+            {/* ================= Cart Totals ================= */}
+
             <div className="col-md-5">
 
               <h2 className="fw-bold mb-4">Cart Totals</h2>
@@ -86,16 +91,23 @@ const CartTable = () => {
 
                   <tr>
                     <td>Subtotal</td>
-                    <td className="text-end">${subtotal}.00</td>
+
+                    <td className="text-end">
+                      ${subtotal}.00
+                    </td>
                   </tr>
 
                   <tr>
                     <td>Delivery Fee</td>
-                    <td className="text-end">${deliveryFee}.00</td>
+
+                    <td className="text-end">
+                      ${deliveryFee}.00
+                    </td>
                   </tr>
 
                   <tr className="fw-bold">
                     <td>Total</td>
+
                     <td className="text-end">
                       ${subtotal + deliveryFee}.00
                     </td>
@@ -110,13 +122,14 @@ const CartTable = () => {
                   backgroundColor: "#02ab95",
                   borderRadius: "4px",
                 }}
+                onClick={() => navigate("/order")}
               >
                 PROCEED TO CHECKOUT
               </button>
 
             </div>
 
-            {/* Right Side */}
+            {/* ================= Promo Code ================= */}
 
             <div className="col-md-6 offset-md-1 my-4">
 

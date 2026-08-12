@@ -6,6 +6,7 @@ import Cart from './pages/Cart'
 import AddItemPage from './pages/admin/AddItemPage'
 import Layout from './pages/Layout'
 import ListItemsPage from './pages/admin/ListItemsPage'
+import PlaceOrder from './pages/PlaceOrder'
 const App = () => {
   return (
     <>
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path="/order" element={<PlaceOrder/>}/>
           <Route
           path="/admin"
           element={<Layout/>}
