@@ -42,7 +42,7 @@ export const addFoodItem = async (req, res) => {
 };
 export const getAllFoodItems=async(req,res)=>{
    try{
-      const foodItems=await Food.find({}).sort({createdAt:-1});
+      const foodItems=await Food.find({});
       return res.send({ success: true, foodItems });
    }catch(error){
     return res.send({ success: false, message: error.message });

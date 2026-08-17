@@ -1,89 +1,250 @@
-import React, { createContext, useState } from "react";
-import { food_list } from "../assets/frontend_assets/assets";
+import React, {
+    createContext,
+    useEffect,
+    useState
+} from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-  const [products, setProducts] = useState(food_list);
-  // Add item to cart
-  const addToCart = (id) => {
-    const product = products.find((item) => item._id === id);
 
-    if (!product) return;
+    const [products, setProducts] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
 
-    const exists = cartItems.find((item) => item._id === id);
+    const [token, setToken] = useState(
+        localStorage.getItem("token")
+    );
 
-    if (!exists) {
-      setCartItems([
-        ...cartItems,
-        {
-          ...product,
-          quantity: 1,
-        },
-      ]);
-    } else {
-      setCartItems(
-        cartItems.map((item) =>
-          item._id === id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      );
-    }
-  };
-   const addProduct=(product)=>{
-    setProducts([...products,product]);
-   }
-    const removeProduct=(id)=>{
-      const newProducts=products.filter((item)=>item._id!==id);
-    setProducts(newProducts);
-   }
-  // Remove item from cart
-  const removeFromCart = (id) => {
-    const exists = cartItems.find((item) => item._id === id);
+    const [isAdmin, setIsAdmin] = useState(
+        localStorage.getItem("isAdmin") === "true"
+    );
 
-    if (!exists) return;
 
-    if (exists.quantity === 1) {
-      setCartItems(cartItems.filter((item) => item._id !== id));
-    } else {
-      setCartItems(
-        cartItems.map((item) =>
-          item._id === id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        )
-      );
-    }
-  };
-  const deleteFromCart=(id)=>{
-     const exists = cartItems.find((item) => item._id === id);
-      setCartItems(cartItems.filter((item) => item._id !== id));
-  }
+    // ================= GET FOOD ITEMS =================
 
-  // Total number of items in cart
-  const cartCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+    const getProducts = async () => {
+        try {
+            const response = await axios.get("/api/food/all");
 
-  const value = {
-    products,
-    addProduct,
-    removeProduct,
-    cartItems,
-    cartCount,
-    addToCart,
-    removeFromCart,
-    deleteFromCart
-  };
+            if (response.data.success) {
+                setProducts(response.data.foodItems);
+            } else {
+                toast.error(response.data.message);
+            }
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
-  );
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message ||
+                error.message
+            );
+        }
+    };
+
+
+    // ================= GET CART =================
+
+    const getCartItems = async () => {
+
+        if (!token) {
+            setCartItems([]);
+            return;
+        }
+
+        try {
+            
+
+            const response = await axios.get(
+                "/api/cart/",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            console.log("CART DATA:", response.data.cart);
+            if (response.data.success) {
+
+                setCartItems(response.data.cart);
+
+            } else {
+
+                toast.error(response.data.message);
+
+            }
+
+        } catch (error) {
+
+            toast.error(
+                error.response?.data?.message ||
+                error.message
+            );
+
+        }
+    };
+
+
+    // ================= ADD TO CART =================
+
+    const addToCart = async (foodId) => {
+
+        if (!token) {
+            toast.error("Please login first");
+            return;
+        }
+
+        try {
+
+            const response = await axios.post(
+                "/api/cart/add",
+                { foodId },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (response.data.success) {
+
+                // Refresh cart immediately
+                await getCartItems();
+
+            } else {
+
+                toast.error(response.data.message);
+
+            }
+
+        } catch (error) {
+
+            toast.error(
+                error.response?.data?.message ||
+                error.message
+            );
+
+        }
+    };
+
+
+    // ================= REMOVE FROM CART =================
+
+    const removeFromCart = async (foodId) => {
+
+        if (!token) {
+            toast.error("Please login first");
+            return;
+        }
+
+        try {
+
+            const response = await axios.post(
+                "/api/cart/remove",
+                { foodId },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (response.data.success) {
+
+                // Refresh cart immediately
+                await getCartItems();
+
+            } else {
+
+                toast.error(response.data.message);
+
+            }
+
+        } catch (error) {
+
+            toast.error(
+                error.response?.data?.message ||
+                error.message
+            );
+
+        }
+    };
+
+
+    // ================= CART COUNT =================
+
+    const cartCount = cartItems.reduce(
+        (total, item) =>
+            total + item.quantity,
+        0
+    );
+
+
+    // ================= LOGOUT =================
+
+    const logout = () => {
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("isAdmin");
+
+        setToken(null);
+        setIsAdmin(false);
+        setCartItems([]);
+
+        toast.success("Logged out successfully");
+    };
+
+
+    // ================= INITIAL LOAD =================
+
+    useEffect(() => {
+
+        getProducts();
+
+    }, []);
+
+
+    // ================= GET CART AFTER LOGIN =================
+
+    useEffect(() => {
+
+        if (token) {
+
+            getCartItems();
+
+        } else {
+
+            setCartItems([]);
+
+        }
+
+    }, [token]);
+
+
+    const value = {
+        products,
+        cartItems,
+        cartCount,
+
+        addToCart,
+        removeFromCart,
+        getCartItems,
+
+        token,
+        isAdmin,
+
+        setToken,
+        setIsAdmin,
+
+        logout
+    };
+
+
+    return (
+        <AppContext.Provider value={value}>
+            {children}
+        </AppContext.Provider>
+    );
 };
 
 export default AppContextProvider;
