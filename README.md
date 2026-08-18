@@ -17,24 +17,36 @@ The project follows a **decoupled frontend/backend architecture**, with a React-
 ## Screenshots
 
 ### Home Page
+<img width="1920" height="1080" alt="Screenshot (2172)" src="https://github.com/user-attachments/assets/2a516034-1081-4222-8e9b-900de4d4592e" />
+
 
 
 ### Food / Menu Section
+<img width="1920" height="1080" alt="Screenshot (2174)" src="https://github.com/user-attachments/assets/cb5c3c44-1d24-42f7-a60b-e1789098010c" />
+
 
 
 ### Shopping Cart
+<img width="1920" height="1080" alt="Screenshot (2178)" src="https://github.com/user-attachments/assets/32438ad9-33a7-46e1-b773-79293d285a26" />
+
 
 
 ### Order Placement
+<img width="1920" height="1080" alt="Screenshot (2179)" src="https://github.com/user-attachments/assets/704d3666-036e-4391-8d43-0f979902a2cc" />
 
 
 ### Payment / Checkout
+<img width="1920" height="1080" alt="Screenshot (2180)" src="https://github.com/user-attachments/assets/18299ecd-7b0e-4388-9581-f1d43352a906" />
 
 
 ###  My Orders
+<img width="1920" height="1080" alt="Screenshot (2177)" src="https://github.com/user-attachments/assets/010de877-2f4d-4ac8-8cc0-2005ff147285" />
 
 
 ### Admin Dashboard
+<img width="1920" height="1080" alt="Screenshot (2183)" src="https://github.com/user-attachments/assets/42d216a1-e254-4186-9e0a-d71108b80a07" />
+<img width="1920" height="1080" alt="Screenshot (2182)" src="https://github.com/user-attachments/assets/f48c3483-1162-46bb-8ea7-4cdca17ac6fc" />
+<img width="1920" height="1080" alt="Screenshot (2181)" src="https://github.com/user-attachments/assets/00a12169-36e1-49b0-b6d4-3c7adecd6169" />
 
 
 
