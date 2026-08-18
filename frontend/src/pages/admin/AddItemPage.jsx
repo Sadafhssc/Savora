@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
-import AddItem from '../../components/addItem'
+import AddItem from '../../components/AddItem'
 import SidePanel from '../../components/SidePanel'
 
 const AddItemPage = () => {
