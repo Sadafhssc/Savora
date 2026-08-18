@@ -9,7 +9,12 @@ import orderRouter from "./routes/order.routes.js";
 
 const PORT=process.env.PORT || 3000;
 const app=express();
-app.use(cors());
+import cors from "cors";
+
+app.use(cors({
+  origin: ["https://savora-orpin.vercel.app", "https://savora-client-git-main-sadafhsscs-projects.vercel.app"],
+  credentials: true
+}));
 app.use(express.json());
 await connectDB();
 app.use("/api/food",FoodRouter);
