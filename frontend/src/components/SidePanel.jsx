@@ -5,60 +5,125 @@ import { assets } from "../assets/admin_assets/assets";
 const SidePanel = () => {
   return (
     <div
-      className="bg-white border-end"
+      className="bg-white border-bottom"
       style={{
-        width: "260px",
-        minHeight: "100vh",
+        width: "100%",
+        minHeight: "auto",
       }}
     >
-      <ul className="nav flex-column pt-4">
-
-
-        {/* Add Blogs */}
-        <li className="nav-item">
+      <ul
+        className="nav w-100 m-0 p-0 d-flex flex-row flex-lg-column"
+        style={{
+          listStyle: "none",
+        }}
+      >
+        {/* Add Items */}
+        <li
+          className="nav-item"
+          style={{
+            width: "33.333%",
+          }}
+        >
           <NavLink
             to="/admin"
             className={({ isActive }) =>
-              `nav-link d-flex align-items-center gap-3 py-3 px-4 ${
-                isActive ? "bg-light border-end border-4 border-primary fw-semibold" : "text-dark"
+              `nav-link d-flex align-items-center justify-content-center gap-2 ${
+                isActive
+                  ? "bg-light fw-semibold"
+                  : "text-dark"
               }`
             }
+            style={({ isActive }) => ({
+              minHeight: "65px",
+              padding: "12px 5px",
+              borderBottom: isActive
+                ? "4px solid #0d6efd"
+                : "4px solid transparent",
+              borderRight: "none",
+              whiteSpace: "nowrap",
+            })}
           >
-            <img src={assets.add_icon} alt="" width={22} height={22} />
+            <img
+              src={assets.add_icon}
+              alt=""
+              width={22}
+              height={22}
+            />
             <span>Add Items</span>
           </NavLink>
         </li>
 
-        {/* Blog Lists */}
-        <li className="nav-item">
+        {/* List Items */}
+        <li
+          className="nav-item"
+          style={{
+            width: "33.333%",
+          }}
+        >
           <NavLink
             to="/admin/list-items"
             className={({ isActive }) =>
-              `nav-link d-flex align-items-center gap-3 py-3 px-4 ${
-                isActive ? "bg-light border-end border-4 border-primary fw-semibold" : "text-dark"
+              `nav-link d-flex align-items-center justify-content-center gap-2 ${
+                isActive
+                  ? "bg-light fw-semibold"
+                  : "text-dark"
               }`
             }
+            style={({ isActive }) => ({
+              minHeight: "65px",
+              padding: "12px 5px",
+              borderBottom: isActive
+                ? "4px solid #0d6efd"
+                : "4px solid transparent",
+              borderRight: "none",
+              whiteSpace: "nowrap",
+            })}
           >
-            <img src={assets.order_icon} alt="" width={22} height={22} />
+            <img
+              src={assets.order_icon}
+              alt=""
+              width={22}
+              height={22}
+            />
             <span>List Items</span>
           </NavLink>
         </li>
 
-        {/* Comments */}
-        <li className="nav-item">
+        {/* Orders */}
+        <li
+          className="nav-item"
+          style={{
+            width: "33.333%",
+          }}
+        >
           <NavLink
             to="/admin/orders"
             className={({ isActive }) =>
-              `nav-link d-flex align-items-center gap-3 py-3 px-4 ${
-                isActive ? "bg-light border-end border-4 border-primary fw-semibold" : "text-dark"
+              `nav-link d-flex align-items-center justify-content-center gap-2 ${
+                isActive
+                  ? "bg-light fw-semibold"
+                  : "text-dark"
               }`
             }
+            style={({ isActive }) => ({
+              minHeight: "65px",
+              padding: "12px 5px",
+              borderBottom: isActive
+                ? "4px solid #0d6efd"
+                : "4px solid transparent",
+              borderRight: "none",
+              whiteSpace: "nowrap",
+            })}
           >
-            <img src={assets.order_icon} alt="" width={22} height={22} />
+            <img
+              src={assets.order_icon}
+              alt=""
+              width={22}
+              height={22}
+            />
             <span>Orders</span>
           </NavLink>
         </li>
-
       </ul>
     </div>
   );

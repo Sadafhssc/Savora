@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import { assets } from "../assets/frontend_assets/assets";
-
 import { AppContext } from "../context/AppContextProvider";
 
 const Navbar = () => {
@@ -13,206 +12,355 @@ const Navbar = () => {
         logout
     } = useContext(AppContext);
 
-    return (
-        <nav className="container py-4">
+    const savoraColor = "#00C2A8";
 
-            <div className="d-flex justify-content-between align-items-center">
+    return (
+        <nav
+            className="navbar navbar-expand-lg bg-white"
+            style={{
+                padding: "15px 0",
+                position: "relative",
+                zIndex: 1000
+            }}
+        >
+
+            <div className="container">
 
                 {/* ================= LOGO ================= */}
 
                 <NavLink
                     to="/"
-                    className="text-decoration-none"
+                    className="navbar-brand m-0"
                 >
                     <img
                         src={assets.logo}
                         alt="Savora Logo"
                         style={{
                             width: "180px",
+                            maxWidth: "100%",
                             cursor: "pointer"
                         }}
                     />
                 </NavLink>
 
 
-                {/* ================= NAVIGATION ================= */}
+                {/* ================= MOBILE TOGGLER ================= */}
 
-                <ul className="nav gap-4">
-
-                    {/* Home */}
-
-                    <li className="nav-item">
-                        <NavLink
-                            to="/"
-                            className={({ isActive }) =>
-                                `nav-link p-0 fw-medium fs-6 ${
-                                    isActive
-                                        ? "text-dark border-bottom border-2 border-dark pb-1"
-                                        : "text-secondary"
-                                }`
-                            }
-                        >
-                            Home
-                        </NavLink>
-                    </li>
-
-
-                    {/* Menu */}
-
-                    <li className="nav-item">
-                        <a
-                            href="#menu"
-                            className="nav-link p-0 text-secondary fw-medium fs-6"
-                        >
-                            Menu
-                        </a>
-                    </li>
-
-
-                    {/* About */}
-
-                    <li className="nav-item">
-                        <a
-                            href="#about"
-                            className="nav-link p-0 text-secondary fw-medium fs-6"
-                        >
-                            About
-                        </a>
-                    </li>
-
-
-                    {/* Contact */}
-
-                    <li className="nav-item">
-                        <a
-                            href="#contact"
-                            className="nav-link p-0 text-secondary fw-medium fs-6"
-                        >
-                            Contact Us
-                        </a>
-                    </li>
-
-
-                    {/* My Orders */}
-
-                    {token && (
-                        <li className="nav-item">
-                            <NavLink
-                                to="/myorders"
-                                className={({ isActive }) =>
-                                    `nav-link p-0 fw-medium fs-6 ${
-                                        isActive
-                                            ? "text-dark border-bottom border-2 border-dark pb-1"
-                                            : "text-secondary"
-                                    }`
-                                }
-                            >
-                                Orders
-                            </NavLink>
-                        </li>
-                    )}
-
-
-                    {/* Admin */}
-
-                    {token && isAdmin && (
-                        <li className="nav-item">
-                            <NavLink
-                                to="/admin"
-                                className={({ isActive }) =>
-                                    `nav-link p-0 fw-medium fs-6 ${
-                                        isActive
-                                            ? "text-dark border-bottom border-2 border-dark pb-1"
-                                            : "text-secondary"
-                                    }`
-                                }
-                            >
-                                Admin
-                            </NavLink>
-                        </li>
-                    )}
-
-                </ul>
-
-
-                {/* ================= RIGHT SIDE ================= */}
-
-                <div className="d-flex align-items-center gap-4">
-
-                    {/* Search */}
-
-                    <i
-                        className="bi bi-search"
+                <button
+                    className="navbar-toggler shadow-none"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#savoraNavbar"
+                    aria-controls="savoraNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    style={{
+                        border: `2px solid ${savoraColor}`,
+                        borderRadius: "8px",
+                        padding: "5px 9px",
+                        backgroundColor: "#fff",
+                        color: savoraColor
+                    }}
+                >
+                    <span
                         style={{
-                            fontSize: "27px",
-                            cursor: "pointer"
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            width: "24px",
+                            height: "19px"
                         }}
-                    ></i>
+                    >
+                        <span
+                            style={{
+                                display: "block",
+                                width: "24px",
+                                height: "2px",
+                                backgroundColor: savoraColor,
+                                borderRadius: "2px"
+                            }}
+                        ></span>
+
+                        <span
+                            style={{
+                                display: "block",
+                                width: "24px",
+                                height: "2px",
+                                backgroundColor: savoraColor,
+                                borderRadius: "2px"
+                            }}
+                        ></span>
+
+                        <span
+                            style={{
+                                display: "block",
+                                width: "24px",
+                                height: "2px",
+                                backgroundColor: savoraColor,
+                                borderRadius: "2px"
+                            }}
+                        ></span>
+                    </span>
+                </button>
 
 
-                    {/* Cart */}
+                {/* ================= NAVBAR CONTENT ================= */}
 
-                    <NavLink to="/cart">
+                <div
+                    className="collapse navbar-collapse"
+                    id="savoraNavbar"
+                >
 
-                        <div className="position-relative">
+                    {/* ================= NAVIGATION ================= */}
 
-                            <img
-                                src={assets.basket_icon}
-                                alt="Basket"
+                    <ul
+                        className="
+                            navbar-nav
+                            mx-auto
+                            align-items-lg-center
+                            gap-lg-4
+                            mt-3
+                            mt-lg-0
+                        "
+                    >
+
+                        {/* Home */}
+
+                        <li className="nav-item">
+                            <NavLink
+                                to="/"
+                                className={({ isActive }) =>
+                                    `nav-link fw-medium ${
+                                        isActive
+                                            ? "border-bottom border-2"
+                                            : ""
+                                    }`
+                                }
+                                style={({ isActive }) => ({
+                                    color: isActive
+                                        ? savoraColor
+                                        : "#666",
+                                    width: "fit-content"
+                                })}
+                            >
+                                Home
+                            </NavLink>
+                        </li>
+
+
+                        {/* Menu */}
+
+                        <li className="nav-item">
+                            <a
+                                href="#menu"
+                                className="nav-link fw-medium"
                                 style={{
-                                    width: "28px",
-                                    cursor: "pointer"
+                                    color: "#666"
                                 }}
-                            />
-
-                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                {cartCount}
-                            </span>
-
-                        </div>
-
-                    </NavLink>
+                            >
+                                Menu
+                            </a>
+                        </li>
 
 
-                    {/* Sign In */}
+                        {/* About */}
 
-                    {!token && (
-                        <button
-                            className="btn"
+                        <li className="nav-item">
+                            <a
+                                href="#about"
+                                className="nav-link fw-medium"
+                                style={{
+                                    color: "#666"
+                                }}
+                            >
+                                About
+                            </a>
+                        </li>
+
+
+                        {/* Contact */}
+
+                        <li className="nav-item">
+                            <a
+                                href="#contact"
+                                className="nav-link fw-medium"
+                                style={{
+                                    color: "#666"
+                                }}
+                            >
+                                Contact Us
+                            </a>
+                        </li>
+
+
+                        {/* Orders */}
+
+                        {token && (
+                            <li className="nav-item">
+                                <NavLink
+                                    to="/myorders"
+                                    className={({ isActive }) =>
+                                        `nav-link fw-medium ${
+                                            isActive
+                                                ? "border-bottom border-2"
+                                                : ""
+                                        }`
+                                    }
+                                    style={({ isActive }) => ({
+                                        color: isActive
+                                            ? savoraColor
+                                            : "#666",
+                                        width: "fit-content"
+                                    })}
+                                >
+                                    Orders
+                                </NavLink>
+                            </li>
+                        )}
+
+
+                        {/* Admin */}
+
+                        {token && isAdmin && (
+                            <li className="nav-item">
+                                <NavLink
+                                    to="/admin"
+                                    className={({ isActive }) =>
+                                        `nav-link fw-medium ${
+                                            isActive
+                                                ? "border-bottom border-2"
+                                                : ""
+                                        }`
+                                    }
+                                    style={({ isActive }) => ({
+                                        color: isActive
+                                            ? savoraColor
+                                            : "#666",
+                                        width: "fit-content"
+                                    })}
+                                >
+                                    Admin
+                                </NavLink>
+                            </li>
+                        )}
+
+                    </ul>
+
+
+                    {/* ================= RIGHT SIDE ================= */}
+
+                    <div
+                        className="
+                            d-flex
+                            flex-column
+                            flex-lg-row
+                            align-items-lg-center
+                            gap-3
+                            mt-3
+                            mt-lg-0
+                        "
+                    >
+
+                        {/* Search */}
+
+                        <i
+                            className="bi bi-search d-none d-lg-block"
                             style={{
-                                border: "2px solid #00C2A8",
-                                borderRadius: "30px",
-                                padding: "8px 24px",
-                                color: "#555",
-                                background: "#fff",
-                                fontWeight: "500"
+                                fontSize: "23px",
+                                cursor: "pointer",
+                                color: "#333"
                             }}
-                            data-bs-toggle="modal"
-                            data-bs-target="#signUpModal"
+                        ></i>
+
+
+                        {/* Cart */}
+
+                        <NavLink
+                            to="/cart"
+                            className="text-decoration-none"
                         >
-                            Sign In
-                        </button>
-                    )}
+                            <div className="position-relative">
+
+                                <img
+                                    src={assets.basket_icon}
+                                    alt="Basket"
+                                    style={{
+                                        width: "28px",
+                                        cursor: "pointer"
+                                    }}
+                                />
+
+                                {/* Cart Count */}
+
+                                <span
+                                    className="
+                                        position-absolute
+                                        badge
+                                        rounded-pill
+                                        bg-danger
+                                    "
+                                    style={{
+                                        top: "-7px",
+                                        right: "-5px",
+                                        fontSize: "10px",
+                                        minWidth: "18px",
+                                        height: "18px",
+                                        padding: "2px 5px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}
+                                >
+                                    {cartCount}
+                                </span>
+
+                            </div>
+                        </NavLink>
 
 
-                    {/* Logout */}
+                        {/* Sign In */}
 
-                    {token && (
-                        <button
-                            className="btn"
-                            onClick={logout}
-                            style={{
-                                border: "2px solid #00C2A8",
-                                borderRadius: "30px",
-                                padding: "8px 24px",
-                                color: "#555",
-                                background: "#fff",
-                                fontWeight: "500"
-                            }}
-                        >
-                            Logout
-                        </button>
-                    )}
+                        {!token && (
+                            <button
+                                className="btn"
+                                style={{
+                                    border: `2px solid ${savoraColor}`,
+                                    borderRadius: "30px",
+                                    padding: "8px 24px",
+                                    color: "#555",
+                                    background: "#fff",
+                                    fontWeight: "500",
+                                    whiteSpace: "nowrap"
+                                }}
+                                data-bs-toggle="modal"
+                                data-bs-target="#signUpModal"
+                            >
+                                Sign In
+                            </button>
+                        )}
+
+
+                        {/* Logout */}
+
+                        {token && (
+                            <button
+                                className="btn"
+                                onClick={logout}
+                                style={{
+                                    border: `2px solid ${savoraColor}`,
+                                    borderRadius: "30px",
+                                    padding: "8px 24px",
+                                    color: "#555",
+                                    background: "#fff",
+                                    fontWeight: "500",
+                                    whiteSpace: "nowrap"
+                                }}
+                            >
+                                Logout
+                            </button>
+                        )}
+
+                    </div>
 
                 </div>
 
