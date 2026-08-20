@@ -42,7 +42,7 @@ const AppContextProvider = ({ children }) => {
             );
         }
     };
-<<<<<<< HEAD
+
     const removeProduct=async(id)=>{
         try {
             const response=await axios.post("/api/food/delete", { id });
@@ -57,23 +57,6 @@ const AppContextProvider = ({ children }) => {
             toast.error(error.message);
         }
     }
-=======
-    const removeProduct = async (id) => {
-    try {
-        const response = await axios.post("/api/food/delete", { id });
-
-        await getProducts();
-
-        if (response.data.success) {
-            toast.success(response.data.message);
-        } else {
-            toast.error(response.data.message);
-        }
-    } catch (error) {
-        toast.error(error.message);
-    }
-};
->>>>>>> 2c963c6a504b9c1b55dd6b31a15c5fcc7aa68c9d
 
 
     // ================= GET CART =================
